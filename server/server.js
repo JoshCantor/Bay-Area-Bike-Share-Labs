@@ -1,7 +1,8 @@
 var express = require('express'),
 	app = express(),
 	knex = require('./db/knex'),
-	morgan = require('morgan');
+	morgan = require('morgan'),
+	path = require('path');
 
 require('locus');
 require('dotenv').load();
@@ -9,6 +10,9 @@ app.use(morgan('tiny'));
 
 
 
+app.use('/', express.static(path.join(__dirname, "../client")));
+
+console.log(__dirname);
 
 var data = require('./routes');
 app.use('/data', data);
