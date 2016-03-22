@@ -7,10 +7,10 @@ module.exports = {
     connection: {
       database: 'bikeshare'
     },
-    debug:true,
+    debug:false,
     pool: {
       min:1,
-      max:1
+      max:5
     }
   },
 

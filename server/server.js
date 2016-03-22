@@ -12,8 +12,6 @@ app.use(morgan('tiny'));
 
 app.use('/', express.static(path.join(__dirname, "../client")));
 
-console.log(__dirname);
-
 var data = require('./routes');
 app.use('/data', data);
 

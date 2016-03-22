@@ -10,21 +10,21 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.0/angular-resource.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.0/angular-route.js"></script>
 
-	<!-- Angular Controllers -->
-	<!-- Angular Directives -->
-
-	<!-- App -->
-	<script type="text/javascript" src="/app.js"></script>
-
 	<!-- D3 -->
 	<script src="//d3js.org/d3.v3.min.js" charset="utf-8"></script>
+
+	<!-- Angular App -->
+	<script type="text/javascript" src="/app.js"></script>
+
+	<!-- Angular Directives -->
+	<script type="text/javascript" src="/chordDirective.js"></script>
 </head>
 <body>
-	<div ng-controller='ChordController'> 
+	<!-- <div ng-controller='ChordController'>
 		{{hi}}
 	</div>
-
-
+ -->
+	<div ng-view></div>
 
 </body>
 </html>
