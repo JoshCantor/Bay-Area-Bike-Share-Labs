@@ -21,7 +21,6 @@ app.config(function($routeProvider) {
 app.controller('ChordController', function($scope, $http, StationData, ChordData) {
 	var stations = StationData.data;
 	var chordData = ChordData.data;
-	console.log(chordData);
 
 	var stationsObj = {};
 	stations.forEach(function(station, i) {
@@ -37,13 +36,24 @@ app.controller('ChordController', function($scope, $http, StationData, ChordData
 	}
 
 	chordData.forEach(function(obj){
+		if(obj.trip_start_hour === '6') {
 		var startI = stationsObj[obj.start_station],
 			endI = stationsObj[obj.end_station];
 
 		matrix[startI][endI] += Number(obj.count);
+	}
 	});
 
 	$scope.chordMatrix = matrix;
+	$scope.stations = stations;
 
+	$scope.slider = {
+	  value: 5,
+	  options: {
+	    floor: 0,
+	    ceil: 10,
+	    showTicks: true
+	  }
+	};
 
 });
