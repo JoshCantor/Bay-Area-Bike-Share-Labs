@@ -3,6 +3,10 @@
 <head>
 	<title>Bay Area Bike Share</title>
 	<meta charset="UTF-8">
+
+	<!-- Bootstrap -->
+<!-- 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"></script> -->
+
 	<!-- Angular -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.0/angular.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.0/angular-animate.js"></script>
@@ -18,14 +22,17 @@
 
 	<!-- Angular Directives -->
 	<script type="text/javascript" src="/chordDirective.js"></script>
-	<script type="text/javascript" src="/sliderDirective.js"></script>
-</head>
-<body>
-	<!-- <div ng-controller='ChordController'>
-		{{hi}}
-	</div>
- -->
-	<div ng-view></div>
 
+	<!-- CSS -->
+	<link type='style/css' rel='stylesheet' href='/public/css/style.css'>
+
+</head>
+<body>	
+	<div class="landing-left">
+		<div class="landing-left-top">
+			<img class="logo" src="./public/BABS_logo_white_green_cog.png">
+		</div>
+	</div>
+	<div class="content" ng-view></div>
 </body>
 </html>

@@ -21,9 +21,9 @@ app.directive('chord', function() {
 			//row is start station, column is end station
 			var matrix = chordService;
 
-			var width = 1200,
-			    height = 1200,
-			    outerRadius = Math.min(width, height) / 2 - 320,
+			var width = 1000,
+			    height = 1000,
+			    outerRadius = Math.min(width, height) / 2 - 300,
 			    innerRadius = outerRadius - 24;
 
 			var formatPercent = d3.format(".1%");

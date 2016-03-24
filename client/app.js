@@ -5,6 +5,10 @@ var app = angular.module('bikeShare', ['ngRoute']);
 app.config(function($routeProvider) {
 	$routeProvider
 		.when('/', {
+			templateUrl: 'mainTemplate.html',
+			controller: 'MainController'
+		})
+		.when('/rides', {
 			templateUrl: 'chordTemplate.html',
 			controller: 'ChordController',
 			resolve: {
@@ -18,7 +22,12 @@ app.config(function($routeProvider) {
 		});
 });
 
-app.controller('ChordController', function($scope, $http, StationData, ChordData) {
+app.controller('MainController', function($scope) {
+	$scope.me = 5
+});
+
+
+app.controller('ChordController', function($scope, StationData, ChordData) {
 	var stations = StationData.data;
 	var chordData = ChordData.data;
 
@@ -47,13 +56,5 @@ app.controller('ChordController', function($scope, $http, StationData, ChordData
 	$scope.chordMatrix = matrix;
 	$scope.stations = stations;
 
-	$scope.slider = {
-	  value: 5,
-	  options: {
-	    floor: 0,
-	    ceil: 10,
-	    showTicks: true
-	  }
-	};
-
+	
 });
