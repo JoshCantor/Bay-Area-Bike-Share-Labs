@@ -4,15 +4,15 @@
 	<title>Bay Area Bike Share</title>
 	<meta charset="UTF-8">
 
-	<!-- Bootstrap -->
-<!-- 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"></script> -->
-
 	<!-- Angular -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.0/angular.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.0/angular-animate.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.0/angular-cookies.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.0/angular-resource.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.0/angular-route.js"></script>
+
+	<!-- Slider CDN -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/angularjs-slider/2.10.4/rzslider.min.js"></script>
 
 	<!-- D3 -->
 	<script src="//d3js.org/d3.v3.min.js" charset="utf-8"></script>
@@ -29,14 +29,22 @@
 	<!-- Pure CSS -->
 	<link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/pure-min.css">
 
+	<!-- Font Awesome CSS -->
+	<link rel="stylesheet" href="/public/css/font-awesome.min.css">
+
+	<!-- slider cSS -->
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/angularjs-slider/2.10.4/rzslider.min.css" rel='stylesheet'>
+
+	
+
 </head>
 <body>	
-	<div class="landing-left">
+	<div class="landing-left" ng-controller="MainController">
 		<div class="landing-left-top">
 			<img class="logo" src="./public/BABS_logo_white_green_cog.png">
 		</div>
-		<h3 class='landing-text'>Over half a million rides were taken in the first two years...</h3>
-		<button class="pure-button landing-button">See Where They Went!</button>
+		<p class="landing-text" ng-show="show">Over half a million rides in two years...<p>
+		<button class="pure-button" id="landing-button" ng-show="show" ng-click="hideLanding()">See Where They Went</button>
 	</div>
 	<div class="content" ng-view></div>
 </body>

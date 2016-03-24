@@ -21,9 +21,9 @@ app.directive('chord', function() {
 			//row is start station, column is end station
 			var matrix = chordService;
 
-			var width = 1000,
-			    height = 1000,
-			    outerRadius = Math.min(width, height) / 2 - 300,
+			var width = 1180,
+			    height = 1180,
+			    outerRadius = Math.min(width, height) / 2 - 250,
 			    innerRadius = outerRadius - 24;
 
 			var formatPercent = d3.format(".1%");
@@ -45,7 +45,7 @@ app.directive('chord', function() {
 			    .attr("height", height)
 			    .append("g")
 			    .attr("id", "circle")
-			    .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
+			    .attr("transform", "translate(" + width / 2 + "," + height / 2+ ")");
 
 			svg.append("circle")
 			    .attr("r", outerRadius);

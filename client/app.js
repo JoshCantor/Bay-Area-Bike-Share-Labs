@@ -1,6 +1,6 @@
 'use strict';
 
-var app = angular.module('bikeShare', ['ngRoute']);
+var app = angular.module('bikeShare', ['ngRoute', 'rzModule']);
 
 app.config(function($routeProvider) {
 	$routeProvider
@@ -22,8 +22,13 @@ app.config(function($routeProvider) {
 		});
 });
 
-app.controller('MainController', function($scope) {
-	$scope.me = 5
+app.controller('MainController', function($scope, $location) {
+	$scope.show = true;
+
+	$scope.hideLanding = function() {
+		$scope.show = false;
+		$location.path('/rides');
+	}
 });
 
 
@@ -56,5 +61,12 @@ app.controller('ChordController', function($scope, StationData, ChordData) {
 	$scope.chordMatrix = matrix;
 	$scope.stations = stations;
 
-	
+	$scope.slider = {
+	  value: 5,
+	  options: {
+	    floor: 0,
+	    ceil: 10,
+	    showTicks: true
+	  }
+	};
 });

@@ -4,43 +4,52 @@ html, body {
 }
 
 .landing-left {
-	height:785px;
-	width: 244px;
+	height:100%;
+	width: 17.5%;
 	float: left;
-	background-color: #82C9BD;
+	background-color: rgba(130, 201, 189, 0.78)
 } 
 
 .landing-left-top {
-	height:244px;
-	width: 244px;
-	background-color: rgba(70, 75, 79, 0.79);
+	height:30%;
+	width: 100%;
+	background-color: rgba(70, 75, 79, 0.70);
 }
 
 .background-img {
-	height: 785px;
-	width: 1180px;
+	height: 100%;
+	width: 100%;
 	background-image: url('../bikeShare.jpg');
+	background-size: cover;
 	float: left;
 }
 
 .content {
-	height: 785px;
-	width: 1180px;
+	height: 100%;
+	width: 82.5%;
 	float: left;
 }
 
 .logo {
-	margin-left: 10px;
-	margin-top: 80px;
+	margin-left: 5%;
+	margin-top: 30%;
 }
 
 .landing-text {
 	width: 200px;
 	color: white;
 	margin-top: 150px;
-	margin-left: 30px;
+	margin-left: 35px;
+	font-size: 20px
 }
 
-.landing-button {
-	margin-left: 20px;
+#landing-button {
+	margin-left: 12px;
+	padding-left: 7px;
+	background-color: rgba(70, 75, 79, 0.70);
+	color: white;
+	font-family: sans-serif;
+	font-style: italic;
+	font-size: 20px;
+	width: 220px;
 }
