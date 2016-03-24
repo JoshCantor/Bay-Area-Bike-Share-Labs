@@ -34,3 +34,13 @@ html, body {
 	margin-top: 80px;
 }
 
+.landing-text {
+	width: 200px;
+	color: white;
+	margin-top: 150px;
+	margin-left: 30px;
+}
+
+.landing-button {
+	margin-left: 20px;
+}
