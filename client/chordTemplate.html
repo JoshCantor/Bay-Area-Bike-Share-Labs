@@ -1,78 +1,10 @@
-<style>
-
-#circle circle {
-  fill: none;
-  pointer-events: all;
-}
-
-.group path {
-  fill-opacity: .5;
-}
-
-path.chord {
-  stroke: #000;
-  stroke-width: .25px;
-}
-
-#circle:hover path.fade {
-  display: none;
-}
-
-
-* {
-    margin: 0;
-    padding: 0;
-}
-
-
-
-.code {
- margin-top: 5px;
-}
-
-header {
-    background: #0db9f0;
-    color: #fff;
-    margin: -40px;
-    margin-bottom: 40px;
-    text-align: center;
-    padding: 40px 0;
-}
-
-h1 {
-    font-weight: 300;
-}
-
-h2 {
-    margin-bottom: 10px;
-}
-
-.wrapper {
-    background: #fff;
-    padding: 40px;
-}
-
-article {
-    margin-bottom: 10px;
-}
-
-.introduction ul{
-    margin-left:40px;
-}
-
-.tab-pane {
-    padding-top: 10px;
-}
-
-.field-title {
-    width: 100px;
-}
-
-</style>
 <div>
-	<rzslider rz-slider-model="slider.value" rz-slider-options="slider.options"></rzslider>
-	<div class="chord" chord chord-service=chordMatrix stations-service=stations>
+	<div id="slider-div" class="slider">
+		<rzslider rz-slider-model="slider.value" rz-slider-options="slider.options" ng-model="slider" ng-change="updateMatix()">
+		</rzslider>
+	</div>
+	<div class="chord" chord chord-service=chordMatrix stations-service=stations></div>
 </div>
-	
-</div>
+
+
 

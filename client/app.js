@@ -32,7 +32,7 @@ app.controller('MainController', function($scope, $location) {
 });
 
 
-app.controller('ChordController', function($scope, StationData, ChordData) {
+app.controller('ChordController', function($scope, $rootScope, StationData, ChordData) {
 	var stations = StationData.data;
 	var chordData = ChordData.data;
 
@@ -41,32 +41,46 @@ app.controller('ChordController', function($scope, StationData, ChordData) {
 		stationsObj[station.name] = i;
 	});
 	
-	var matrix = [];
-	for(var i = 0; i < stations.length; i++) {
-		matrix[i] = [];
-		for(var j = 0; j < stations.length; j++) {
-			matrix[i][j] = 0;
-		}
-	}
-
-	chordData.forEach(function(obj){
-		if(obj.trip_start_hour === '6') {
-		var startI = stationsObj[obj.start_station],
-			endI = stationsObj[obj.end_station];
-
-		matrix[startI][endI] += Number(obj.count);
-	}
-	});
-
-	$scope.chordMatrix = matrix;
-	$scope.stations = stations;
-
 	$scope.slider = {
-	  value: 5,
+	  value: 0,
 	  options: {
 	    floor: 0,
-	    ceil: 10,
+	    ceil: 23,
 	    showTicks: true
 	  }
 	};
+
+	var matrix = [];
+
+	$scope.$watch('slider.value', function(newVal, oldVal) {
+		createMatrix(newVal);
+		$scope.$broadcast('matrixUpdate');
+		
+	});
+
+	var createMatrix = function(value) { 
+		for(var i = 0; i < stations.length; i++) {
+			matrix[i] = [];
+			for(var j = 0; j < stations.length; j++) {
+				matrix[i][j] = 0;
+			}
+		}
+		
+		chordData.forEach(function(obj){
+			if(obj.trip_start_hour === value.toString()) {
+				var startI = stationsObj[obj.start_station],
+					endI = stationsObj[obj.end_station];
+
+				matrix[startI][endI] += Number(obj.count);
+			}
+		});
+		
+		$scope.chordMatrix = matrix;
+	}
+
+	createMatrix($scope.slider.value);
+	
+	$scope.stations = stations;
+
+	
 });

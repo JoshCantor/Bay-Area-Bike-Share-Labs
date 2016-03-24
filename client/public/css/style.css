@@ -3,6 +3,7 @@ html, body {
     height: 100%;
 }
 
+/*Landing Page */
 .landing-left {
 	height:100%;
 	width: 17.5%;
@@ -53,3 +54,48 @@ html, body {
 	font-size: 20px;
 	width: 220px;
 }
+
+
+
+/*Chord Template*/
+#circle circle {
+  fill: none;
+  pointer-events: all;
+}
+
+.group path {
+  fill-opacity: .5;
+}
+
+path.chord {
+  stroke: #000;
+  stroke-width: .25px;
+}
+
+#circle:hover path.fade {
+  display: none;
+}
+
+.slider {
+	margin-left: 20px;
+	margin-right: 20px;
+	margin-top: 10px;
+}
+
+.rz-limit {
+	display: none;
+}
+
+#slider-div .rz-pointer {
+	background-color: #9DD5CB;
+}
+#slider-div .rz-pointer:focus {
+	background-color: #9DD5CB;
+	outline: 0px none;
+}
+
+#slider-div .rz-active:after {
+	background-color: white;
+}
+
+
