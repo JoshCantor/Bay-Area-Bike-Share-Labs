@@ -50,7 +50,10 @@ app.controller('ChordController', function($scope, $rootScope, StationData, Chor
 	  }
 	};
 
-	var matrix = [];
+	var chordServiceData = {
+		matrix: [],
+	};
+	
 
 	$scope.$watch('slider.value', function(newVal, oldVal) {
 		createMatrix(newVal);
@@ -60,23 +63,26 @@ app.controller('ChordController', function($scope, $rootScope, StationData, Chor
 
 	var createMatrix = function(value) { 
 		for(var i = 0; i < stations.length; i++) {
-			matrix[i] = [];
+			chordServiceData.matrix[i] = [];
 			for(var j = 0; j < stations.length; j++) {
-				matrix[i][j] = 0;
+				chordServiceData.matrix[i][j] = 0;
 			}
 		}
 		
+		chordServiceData.totalTrips = 0;
+
 		chordData.forEach(function(obj){
 			if(obj.trip_start_hour === value.toString()) {
 				var startI = stationsObj[obj.start_station],
 					endI = stationsObj[obj.end_station];
 
-				matrix[startI][endI] += Number(obj.count);
+				chordServiceData.matrix[startI][endI] += Number(obj.count);
+				chordServiceData.totalTrips += Number(obj.count);
 			}
 		});
 		
-		$scope.chordMatrix = matrix;
-	}
+		$scope.chordServiceData = chordServiceData;
+;	}
 
 	createMatrix($scope.slider.value);
 	

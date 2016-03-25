@@ -8,24 +8,19 @@ app.directive('chord', function() {
 		},
 		link: function(scope, element, attrs) {
 
-			var chordService = scope.chordService,
+			var chordServiceData = scope.chordService,
 				stationsService = scope.stationsService,
-				colors = ['#9C6744','#C9BEB9','#CFA07E','#C4BAA1','#C2B6BF','#121212','#8FB5AA','#85889E','#9C7989','#91919C','#242B27','#212429','#99677B','#36352B','#33332F','#2B2B2E','#2E1F13','#2B242A','#918A59','#6E676C','#6E4752','#6B4A2F','#998476','#8A968D','#968D8A','#968D96','#CC855C', '#967860','#929488','#949278','#A0A3BD','#BD93A1','#65666B','#6B5745','#6B6664','#695C52','#56695E','#69545C','#565A69','#696043','#63635C','#636150','#333131','#332820','#302D30','#302D1F','#2D302F','#CFB6A3','#362F2A'],
-				totalTrips = 0;
+				colors = ['#9C6744','#C9BEB9','#CFA07E','#C4BAA1','#C2B6BF','#121212','#8FB5AA','#85889E','#9C7989','#91919C','#242B27','#212429','#99677B','#36352B','#33332F','#2B2B2E','#2E1F13','#2B242A','#918A59','#6E676C','#6E4752','#6B4A2F','#998476','#8A968D','#968D8A','#968D96','#CC855C', '#967860','#929488','#949278','#A0A3BD','#BD93A1','#65666B','#6B5745','#6B6664','#695C52','#56695E','#69545C','#565A69','#696043','#63635C','#636150','#333131','#332820','#302D30','#302D1F','#2D302F','#CFB6A3','#362F2A'];
 			
-			chordService.forEach(function(row){
-				row.forEach(function(column){
-					totalTrips += column
-				});
-			});
+			
 
-			var createChordDiagram = function(chordMatrix) {
+			var createChordDiagram = function(chordData) {
 				//row is start station, column is end station
-				var matrix = chordMatrix;
+				var matrix = chordData.matrix;
 
 				var width = 1180,
 				    height = 1180,
-				    outerRadius = Math.min(width, height) / 2 - 250,
+				    outerRadius = Math.min(width, height) / 2 - 230,
 				    innerRadius = outerRadius - 24;
 
 				var formatPercent = d3.format(".1%");
@@ -48,7 +43,7 @@ app.directive('chord', function() {
 				    .attr("height", height)
 				    .append("g")
 				    .attr("id", "circle")
-				    .attr("transform", "translate(" + width / 2 + "," + height / 2+ ")");
+				    .attr("transform", "translate(" + width / 2 + "," + height / 3.1 + ")");
 
 				svg.append("circle")
 				    .attr("r", outerRadius);
@@ -65,7 +60,7 @@ app.directive('chord', function() {
 
 				// Add a mouseover title.
 				group.append("title").text(function(d, i) {
-				return stationsService[i].name + ": " + formatPercent(d.value / totalTrips) + " of origins";
+				return stationsService[i].name + ": " + formatPercent(d.value / chordData.totalTrips) + " of origins (" + d.value + ")";
 				});
 
 				// Add the group arc.
@@ -75,7 +70,7 @@ app.directive('chord', function() {
 				  .style("fill", function(d, i) { return colors[i]; });
 
 				group.append("title").text(function(d, i) {
-				return stationsService[i].name + ": " + formatPercent(d.value / totalTrips) + " of origins";
+				return stationsService[i].name + ": " + formatPercent(d.value / chordData.totalTrips) + " of origins";
 				});
 
 				// Add the group arc.
@@ -84,18 +79,18 @@ app.directive('chord', function() {
 				  .attr("d", arc)
 				  .style("fill", function(d, i) { return colors[i]; });
 
-				group.append("text")
-				  .each(function(d) { d.angle = (d.startAngle + d.endAngle) / 2; })
-				  .attr("dy", ".35em")
-				  .style("font-family", "helvetica, arial, sans-serif")
-				  .style("font-size", "12px")
-				  .attr("text-anchor", function(d) { return d.angle > Math.PI ? "end" : null; })
-				  .attr("transform", function(d) {
-				    return "rotate(" + (d.angle * 180 / Math.PI - 90) + ")"
-				        + "translate(" + (outerRadius+5) + ")"
-				        + (d.angle > Math.PI ? "rotate(180)" : "");
-				  })
-				  .text(function(d){return stationsService[d.index].name;}); 
+				// group.append("text")
+				//   .each(function(d) { d.angle = (d.startAngle + d.endAngle) / 2; })
+				//   .attr("dy", ".35em")
+				//   .style("font-family", "helvetica, arial, sans-serif")
+				//   .style("font-size", "12px")
+				//   .attr("text-anchor", function(d) { return d.angle > Math.PI ? "end" : null; })
+				//   .attr("transform", function(d) {
+				//     return "rotate(" + (d.angle * 180 / Math.PI - 90) + ")"
+				//         + "translate(" + (outerRadius+5) + ")"
+				//         + (d.angle > Math.PI ? "rotate(180)" : "");
+				//   })
+				//   .text(function(d){return stationsService[d.index].name;}); 
 
 				// Add the chords.
 				var chord = svg.selectAll(".chord")
@@ -109,17 +104,17 @@ app.directive('chord', function() {
 				chord.append("title").text(function(d) {
 				return stationsService[d.source.index].name
 				    + " → " + stationsService[d.target.index].name
-				    + ": " + formatPercent(d.source.value / totalTrips)
+				    + ": " + formatPercent(d.source.value / chordData.totalTrips)
 				    + "\n" + stationsService[d.target.index].name
 				    + " → " + stationsService[d.source.index].name
-				    + ": " + formatPercent(d.target.value / totalTrips);
+				    + ": " + formatPercent(d.target.value / chordData.totalTrips);
 				});
 
 				function mouseover(d, i) {
-				chord.classed("fade", function(p) {
-				  return p.source.index != i
-				      && p.target.index != i;
-				});
+					chord.classed("fade", function(p) {
+					  return p.source.index != i
+					      && p.target.index != i;
+					});
 				}
 			}
 
