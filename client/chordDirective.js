@@ -20,7 +20,7 @@ app.directive('chord', function() {
 
 				var width = 1180,
 				    height = 1180,
-				    outerRadius = Math.min(width, height) / 2 - 230,
+				    outerRadius = Math.min(width, height) / 2 - 315,
 				    innerRadius = outerRadius - 24;
 
 				var formatPercent = d3.format(".1%");
@@ -70,7 +70,7 @@ app.directive('chord', function() {
 				  .style("fill", function(d, i) { return colors[i]; });
 
 				group.append("title").text(function(d, i) {
-				return stationsService[i].name + ": " + formatPercent(d.value / chordData.totalTrips) + " of origins";
+				return stationsService[i].name + ": " + formatPercent(d.value / chordData.totalTrips) + " of origins (" + d.value + ")";
 				});
 
 				// Add the group arc.
@@ -79,18 +79,27 @@ app.directive('chord', function() {
 				  .attr("d", arc)
 				  .style("fill", function(d, i) { return colors[i]; });
 
-				// group.append("text")
-				//   .each(function(d) { d.angle = (d.startAngle + d.endAngle) / 2; })
-				//   .attr("dy", ".35em")
-				//   .style("font-family", "helvetica, arial, sans-serif")
-				//   .style("font-size", "12px")
-				//   .attr("text-anchor", function(d) { return d.angle > Math.PI ? "end" : null; })
-				//   .attr("transform", function(d) {
-				//     return "rotate(" + (d.angle * 180 / Math.PI - 90) + ")"
-				//         + "translate(" + (outerRadius+5) + ")"
-				//         + (d.angle > Math.PI ? "rotate(180)" : "");
-				//   })
-				//   .text(function(d){return stationsService[d.index].name;}); 
+				group.append("text")
+				  .each(function(d) { d.angle = (d.startAngle + d.endAngle) / 2; })
+				  .attr("dy", ".35em")
+				  .style("font-family", "helvetica, arial, sans-serif")
+				  .style("font-size", "10px")
+				  .attr("text-anchor", function(d) { return d.angle > Math.PI ? "end" : null; })
+				  .attr("transform", function(d) {
+				    return "rotate(" + (d.angle * 180 / Math.PI - 90) + ")"
+				        + "translate(" + (outerRadius+5) + ")"
+				        + (d.angle > Math.PI ? "rotate(180)" : "");
+				  })
+				  .text(function(d){
+				  	var stationName = stationsService[d.index].name;
+				  	if (stationName === "Yerba Buena Center of the Arts (3rd @ Howard)") stationName = "Yerba Buena Center";
+				  	if (stationName === "Temporary Transbay Terminal (Howard at Beale)") stationName = "Temp. Transbay Term.";
+				  	if (stationName === "Harry Bridges Plaza (Ferry Building)") stationName = "Ferry Building";
+				  	if (stationName === "Mechanics Plaza (Market at Battery)") stationName = "Ferry Building";
+				  	if (stationName === "Grant Avenue at Columbus Avenue") stationName = "Grant at Columbus";
+				  	if (stationName === "Powell at Post (Union Square)") stationName = "Union Square";
+				  	return stationName;
+				  }); 
 
 				// Add the chords.
 				var chord = svg.selectAll(".chord")
@@ -104,10 +113,10 @@ app.directive('chord', function() {
 				chord.append("title").text(function(d) {
 				return stationsService[d.source.index].name
 				    + " → " + stationsService[d.target.index].name
-				    + ": " + formatPercent(d.source.value / chordData.totalTrips)
+				    + ": " + formatPercent(d.source.value / chordData.totalTrips) + " (" + d.target.value + ")"
 				    + "\n" + stationsService[d.target.index].name
 				    + " → " + stationsService[d.source.index].name
-				    + ": " + formatPercent(d.target.value / chordData.totalTrips);
+				    + ": " + formatPercent(d.target.value / chordData.totalTrips) + " (" + d.target.value + ")";
 				});
 
 				function mouseover(d, i) {
