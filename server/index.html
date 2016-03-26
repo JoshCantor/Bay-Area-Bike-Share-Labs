@@ -23,13 +23,16 @@
 	<!-- Angular Directives -->
 	<script type="text/javascript" src="/chordDirective.js"></script>
 
+	<!-- Angular Services -->
+	<script type="text/javascript" src="/timeService.js"></script>
+
 	<!-- CSS -->
 	<link type='style/css' rel='stylesheet' href='/public/css/style.css'>
 
 	<!-- Pure CSS -->
 	<link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/pure-min.css">
 
-	<!-- slider cSS -->
+	<!-- slider CSS -->
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/angularjs-slider/2.10.4/rzslider.min.css" rel='stylesheet'>
 
 	
@@ -40,8 +43,10 @@
 		<div class="landing-left-top">
 			<img class="logo" src="./public/BABS_logo_white_green_cog.png">
 		</div>
+		<p class='ride-time'>{{time}}</p>
+		<p class='slider-text' ng-show="!show">{{sliderText}}</p>
 		<p class="landing-text" ng-show="show">Over half a million rides in two years...<p>
-		<button class="pure-button" id="landing-button" ng-show="show" ng-click="hideLanding()">See Where They Went</button>
+		<button class="pure-button" id="landing-button" ng-show="show" ng-click="hideLanding()">See Where They Went!</button>
 	</div>
 	<div class="content" ng-view></div>
 </body>

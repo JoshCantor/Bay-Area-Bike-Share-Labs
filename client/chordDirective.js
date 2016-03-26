@@ -10,10 +10,8 @@ app.directive('chord', function() {
 
 			var chordServiceData = scope.chordService,
 				stationsService = scope.stationsService,
-				colors = ['#9C6744','#C9BEB9','#CFA07E','#C4BAA1','#C2B6BF','#121212','#8FB5AA','#85889E','#9C7989','#91919C','#242B27','#212429','#99677B','#36352B','#33332F','#2B2B2E','#2E1F13','#2B242A','#918A59','#6E676C','#6E4752','#6B4A2F','#998476','#8A968D','#968D8A','#968D96','#CC855C', '#967860','#929488','#949278','#A0A3BD','#BD93A1','#65666B','#6B5745','#6B6664','#695C52','#56695E','#69545C','#565A69','#696043','#63635C','#636150','#333131','#332820','#302D30','#302D1F','#2D302F','#CFB6A3','#362F2A'];
+				colors = ['#9C6744','#C9BEB9','#CFA07E','#C4BAA1','#C2B6BF','#7D4E4E','#8FB5AA','#85889E','#9C7989','#91919C','#436E55','#55719F','#99677B','#9A934F','#9EC472','#4A4A77','#A6571B','#7E5277','#918A59','#6E676C','#6E4752','#6B4A2F','#998476','#8A968D','#968D8A','#968D96','#CC855C', '#967860','#929488','#949278','#A0A3BD','#BD93A1','#546096','#6B5745','#A86951','#695C52','#56695E','#69545C','#565A69','#696043','#63635C','#636150','#333131','#332820','#302D30','#302D1F','#2D302F','#CFB6A3','#362F2A'];
 			
-			
-
 			var createChordDiagram = function(chordData) {
 				//row is start station, column is end station
 				var matrix = chordData.matrix;
@@ -43,7 +41,7 @@ app.directive('chord', function() {
 				    .attr("height", height)
 				    .append("g")
 				    .attr("id", "circle")
-				    .attr("transform", "translate(" + width / 2 + "," + height / 3.1 + ")");
+				    .attr("transform", "translate(" + width / 2 + "," + height / 3.05 + ")");
 
 				svg.append("circle")
 				    .attr("r", outerRadius);
@@ -113,7 +111,7 @@ app.directive('chord', function() {
 				chord.append("title").text(function(d) {
 				return stationsService[d.source.index].name
 				    + " → " + stationsService[d.target.index].name
-				    + ": " + formatPercent(d.source.value / chordData.totalTrips) + " (" + d.target.value + ")"
+				    + ": " + formatPercent(d.source.value / chordData.totalTrips) + " (" + d.source.value + ")"
 				    + "\n" + stationsService[d.target.index].name
 				    + " → " + stationsService[d.source.index].name
 				    + ": " + formatPercent(d.target.value / chordData.totalTrips) + " (" + d.target.value + ")";

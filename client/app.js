@@ -22,17 +22,31 @@ app.config(function($routeProvider) {
 		});
 });
 
-app.controller('MainController', function($scope, $location) {
+app.controller('MainController', function($scope, $location, $rootScope, timeService) {
 	$scope.show = true;
 
 	$scope.hideLanding = function() {
 		$scope.show = false;
 		$location.path('/rides');
 	}
+	
+	$rootScope.$on('valueUpdate', function(event, args) {
+		var currTime = timeService.slider.value
+		if (currTime === 0) {
+			$scope.time = "Rides from 12am-12:59am";
+		} else if (currTime < 12) {
+			$scope.time = "Rides from " + currTime + "am-" + currTime + ":59am";
+		} else if (currTime === 12) {
+			$scope.time = "Rides from " + (currTime) + "pm-" + (currTime) +":59pm";
+		} else {
+			$scope.time = "Rides from " + (currTime - 12) + "pm-" + (currTime - 12) +":59pm";
+		}
+	$scope.sliderText = "Each outer arc is a bike station, and chords show rides between stations. Move slider to change time of day, and hover over the diagram to get ride info. .";
+	});
 });
 
 
-app.controller('ChordController', function($scope, $rootScope, StationData, ChordData) {
+app.controller('ChordController', function($scope, $rootScope, StationData, ChordData, timeService) {
 	var stations = StationData.data;
 	var chordData = ChordData.data;
 
@@ -42,13 +56,15 @@ app.controller('ChordController', function($scope, $rootScope, StationData, Chor
 	});
 	
 	$scope.slider = {
-	  value: 0,
+	  value: 6,
 	  options: {
 	    floor: 0,
 	    ceil: 23,
 	    showTicks: true
 	  }
 	};
+
+	timeService.slider = $scope.slider;
 
 	var chordServiceData = {
 		matrix: [],
@@ -58,7 +74,7 @@ app.controller('ChordController', function($scope, $rootScope, StationData, Chor
 	$scope.$watch('slider.value', function(newVal, oldVal) {
 		createMatrix(newVal);
 		$scope.$broadcast('matrixUpdate');
-		
+		$rootScope.$emit('valueUpdate');
 	});
 
 	var createMatrix = function(value) { 
@@ -82,11 +98,9 @@ app.controller('ChordController', function($scope, $rootScope, StationData, Chor
 		});
 		
 		$scope.chordServiceData = chordServiceData;
-;	}
+	}
 
 	createMatrix($scope.slider.value);
 	
 	$scope.stations = stations;
-
-	
 });
