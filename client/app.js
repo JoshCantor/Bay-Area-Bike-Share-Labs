@@ -41,7 +41,7 @@ app.controller('MainController', function($scope, $location, $rootScope, timeSer
 		} else {
 			$scope.time = "Rides from " + (currTime - 12) + "pm-" + (currTime - 12) +":59pm";
 		}
-	$scope.sliderText = "Each outer arc is a bike station, and chords show rides between stations. Move slider to change time of day, and hover over the diagram to get ride info. .";
+	$scope.sliderText = "Each outer arc is a bike station, and chords show rides between stations. Move slider to change time of day, and hover over the diagram to get ride info.";
 	});
 });
 
