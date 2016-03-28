@@ -5,7 +5,11 @@ var express = require('express'),
 	path = require('path');
 
 require('locus');
-require('dotenv').load();
+
+if (process.env.NODE_ENV !== 'production') {
+	require('dotenv').load();
+}
+
 app.use(morgan('tiny'));
 
 
