@@ -1,1 +1,17 @@
-<img class='bg-img' src="./public/bikeShare.jpg">
+<div ng-controller='MainController'>
+	<img id='bg' src="./public/bikeShare.jpg">
+	<div class='header'>
+		<div class='header-left'>
+			<img class='logo' src='./public/BABS_logo_white_green_cog.png'>
+		</div>
+		<div class='header-center'>
+			<p ng-show="show">Over half a million rides in two years...<p>
+		</div>
+	</div>	
+	<div class='btn'>
+		<button class='pure-button' id='landing-btn' ng-show='show' ng-click='hideLanding()'>See Where They Went!</button>
+	</div>
+</div>
+
+<!-- <p class='ride-time'>{{time}}</p>
+<p class='slider-text' ng-show="!show">{{sliderText}}</p> -->
