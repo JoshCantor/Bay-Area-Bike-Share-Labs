@@ -1,11 +1,14 @@
-<div>
-	<p class='slider-label'>Time of Day:</p>
-	<div id="slider-div" class="slider">
+<div id='time-slider'>
+	<div class='slider-label'>
+		<p class='slider-label-top'>{{time}}</p>
+		<p class='slider-label-middle'>*slide to change time</p>
+		<p class='slider-label-bottom'>**hover over arcs and chords for details</p>
+	</div>
+	<div id="slider-div">
 		<rzslider rz-slider-model="slider.value" rz-slider-options="slider.options" ng-model="slider" ng-change="updateMatix()">
 		</rzslider>
 	</div>
-	<div class="chord" chord chord-service=chordServiceData stations-service=stations></div>
-</div>
-
+</div>	
+<div class="chord" chord chord-service=chordServiceData stations-service=stations></div>
 
 

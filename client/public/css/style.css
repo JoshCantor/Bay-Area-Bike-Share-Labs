@@ -4,17 +4,18 @@ html, body {
 
 /*Landing Page Background Img and Header */
 #bg {
-	position: fixed; 
+	position: absolute; 
 	top: 0; 
 	left: 0;
 	min-height: 100%;
 	min-width: 1000px;
 	height: auto; 
 	width: 100%;
+	z-index: -1;
 }
 
 .header {
-   position: fixed; 
+   position: absolute; 
    top: 0; 
    left: 0; 
    min-width: 650px;
@@ -54,9 +55,8 @@ html, body {
 
 .btn {	
 	width: 100%;
-	position: fixed;
+	position: absolute;
 	top:120px;
-	margin-left: 
 	margin-top: 20px;
 }
 
@@ -69,59 +69,13 @@ html, body {
 	font-family: Muli;
 	font-size: 22px;
 }
-/*
+
 .ride-time {
 	color: rgba(8, 133, 232, 0.7);
 	font-size: 20px;
 	font-family: sans-serif;
 	margin-top: 150px;
 	margin-left: 12px;
-}
-
-.slider-text {
-	color: white;
-	font-size: 15px;
-	font-family: sans-serif;
-	margin-left: 12px;
-	margin-right: 5px;
-}*/
-
-
-/*Chord Template*/
-#circle circle {
-  fill: none;
-  pointer-events: all;
-}
-
-.group path {
-  fill-opacity: .5;
-}
-
-path.chord {
-  stroke: #000;
-  stroke-width: .25px;
-}
-
-#circle:hover path.fade {
-  display: none;
-}
-
-.slider {
-	width: 85%;
-	margin-left: 20px;
-	margin-right: 20px;
-	margin-top: 10px;
-	float:left;
-}
-
-.slider-label {
-	width: 10%;
-	float: left;
-	margin-top: 34px;
-	margin-left: 12px;
-	font-family: sans-serif;
-	font-size: 20px;
-	color: rgba(8, 133, 232, 0.7)
 }
 
 
@@ -142,7 +96,64 @@ path.chord {
 	background-color: white;
 }
 
+#slider-div {
+	width: 79%;
+	position: absolute;
+	top: 10px;
+	left: 350px;
+	float:left;
+}
 
+#time-slider {
+	position: absolute;
+	top: 100px;
+	left: 0;
+	width: 100%;
+	min-width: 1400px;
+}
 
+.slider-label {
+	width: 290px;
+	float: left;
+	margin-top: 5px;
+	margin-left: 40px;
+	font-family: sans-serif;
+	color: rgba(8, 133, 232, 0.7)
+}
 
+.slider-label-top {
+	margin-bottom: 10px;
+	font-size: 24px
+}
 
+.slider-label-middle, .slider-label-bottom {
+	font-size: 15px;
+	margin-top: 2px;
+	margin-bottom: 2px;
+}
+
+/*Chord Template*/
+#circle circle {
+  fill: none;
+  pointer-events: all;
+}
+
+.group path {
+  fill-opacity: .5;
+}
+
+path.chord {
+  stroke: #000;
+  stroke-width: .25px;
+}
+
+#circle:hover path.fade {
+  display: none;
+}
+
+.chord {
+	display: inline-block;
+	position: relative;
+	top: 180px;
+	left: calc((100% - 1180px) / 2);
+}

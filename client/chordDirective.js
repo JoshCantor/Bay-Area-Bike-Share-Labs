@@ -56,9 +56,22 @@ app.directive('chord', function() {
 				  .attr("class", "group")
 				  .on("mouseover", mouseover);
 
+				var currTime = Number(chordData.time),
+					timeRange;
+				if (currTime === 0) {
+					timeRange = "between 12am and 12:59am";
+				} else if (currTime < 12) {
+					timeRange= "between " + currTime + "am and " + currTime + ":59am";
+				} else if (currTime === 12) {
+					timeRange= "between " + (currTime) + "pm and " + (currTime) + ":59pm";
+				} else {
+					timeRange= "between " + (currTime - 12) + "pm and " + (currTime - 12) + ":59pm";
+				}
+
+
 				// Add a mouseover title.
 				group.append("title").text(function(d, i) {
-				return stationsService[i].name + ": " + formatPercent(d.value / chordData.totalTrips) + " of origins (" + d.value + ")";
+				return stationsService[i].name + ": " + formatPercent(d.value / chordData.totalTrips) + " of origins (" + d.value + ") " + timeRange ;
 				});
 
 				// Add the group arc.
@@ -68,7 +81,7 @@ app.directive('chord', function() {
 				  .style("fill", function(d, i) { return colors[i]; });
 
 				group.append("title").text(function(d, i) {
-				return stationsService[i].name + ": " + formatPercent(d.value / chordData.totalTrips) + " of origins (" + d.value + ")";
+				return stationsService[i].name + ": " + formatPercent(d.value / chordData.totalTrips) + " of origins (" + d.value + ") " + timeRange;
 				});
 
 				// Add the group arc.
@@ -111,10 +124,10 @@ app.directive('chord', function() {
 				chord.append("title").text(function(d) {
 				return stationsService[d.source.index].name
 				    + " → " + stationsService[d.target.index].name
-				    + ": " + formatPercent(d.source.value / chordData.totalTrips) + " (" + d.source.value + ")"
+				    + ": " + formatPercent(d.source.value / chordData.totalTrips) + " (" + d.source.value + ") of origins " + timeRange
 				    + "\n" + stationsService[d.target.index].name
 				    + " → " + stationsService[d.source.index].name
-				    + ": " + formatPercent(d.target.value / chordData.totalTrips) + " (" + d.target.value + ")";
+				    + ": " + formatPercent(d.target.value / chordData.totalTrips) + " (" + d.target.value + ") of origins " + timeRange;
 				});
 
 				function mouseover(d, i) {
