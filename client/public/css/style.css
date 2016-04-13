@@ -25,9 +25,8 @@ html, body {
 
 .header-left {
 	height:90px;
-	width: 230px;
+	width: 210px;
 	float: left;
-	border-right: 2px solid white;
 }
 
 .logo {
@@ -36,7 +35,15 @@ html, body {
 }
 
 .header-center {
-	margin-left:20px;
+	margin-top: 15px;
+	margin-left: 20px;
+	height: 60px;
+	border-right: 2px solid white; 
+	float: left;
+}
+
+.header-right {
+	margin-left:22px;
 	float: left;
 	height:90px;
 	padding-top: 12px;
@@ -57,7 +64,7 @@ html, body {
 	display: block;
   	margin-left: auto;
   	margin-right: auto;
-	background-color: rgba(214, 218, 100, 0.9);
+	background-color: rgba(214, 218, 100, 0.95);
 	color: white;
 	font-family: Muli;
 	font-size: 22px;
